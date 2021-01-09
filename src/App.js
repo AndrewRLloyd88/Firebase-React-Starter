@@ -33,6 +33,10 @@ function App() {
     });
   };
 
+  const deletePost = (id) => {
+    db.collection('posts').doc(id).delete();
+  };
+
   return (
     <div className="App">
       <form>
@@ -48,11 +52,12 @@ function App() {
 
       {posts.map(({ id, data: { name, description, message, photoURL } }) => {
         return (
-          <>
+          <div key={id}>
             <h1>{name}</h1>
             <p>{description}</p>
             <p>{message}</p>
-          </>
+            <button onClick={() => deletePost(id)}>Delete</button>
+          </div>
         );
       })}
     </div>
